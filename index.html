@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <script>
+      const ws = new WebSocket("ws://localhost:9160");
+      // Connection opened
+
+      let timer;
+
+      ws.onopen = function() {
+        console.log("onopen");
+        // ws.send("Test");
+      };
+
+      ws.onclose = function() {
+        console.log("onclose");
+      };
+
+      // Listen for messages
+      ws.onmessage = function(event) {
+        console.log("Message from server ", event.data);
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          console.log("disconnected");
+        }, 10 * 1000);
+      };
+    </script>
+  </body>
+</html>
